@@ -1,0 +1,123 @@
+.cls-1 {
+    fill: #8f9cff;
+}
+
+svg {
+    transition: transform 1.2s ease-in-out;
+}
+
+#letter_e {
+    opacity: 0; 
+    animation: gouprest 400ms ease-in-out forwards; 
+    animation-delay: 1700ms;
+}
+
+#letter_s {
+    opacity: 0; 
+    animation: gouprest 400ms ease-in-out forwards; 
+    animation-delay: 1650ms;
+}
+
+#letter_u {
+    opacity: 0; 
+    animation: gouprest 400ms ease-in-out forwards; 
+    animation-delay: 1600ms;
+}
+
+#short_step {
+    opacity: 0;
+    animation: fadein 200ms ease-in-out forwards; 
+    animation-delay: 515ms;
+}
+
+#med_step {
+    opacity: 0; 
+    animation: fadein 200ms ease-in-out forwards; 
+    animation-delay: 715ms;
+}
+
+#long_step {
+    opacity: 0; 
+    animation: fadein 200ms ease-in-out forwards; 
+    animation-delay: 915ms;
+}
+
+#letter_m {
+    opacity: 0; 
+    transform: translateX(165.85px);
+    animation: goup 500ms forwards; 
+    animation-delay: 15ms;
+}
+
+@keyframes goup {
+    from {
+        opacity: 0; 
+        transform: translate(165.85px,16.795px); 
+    }
+    to {
+        opacity: 1;
+        transform: translate(165.85px,0px);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0; 
+        transform: translateX(165.85px);
+    }
+    to {
+        opacity: 1; 
+        transform: translateX(165.85px);
+    }
+}
+
+@keyframes moveleft {
+    from {
+        transform: translateX(0px); 
+    }
+    to {
+        transform: translateX(-165.85px);
+    }
+}
+
+@keyframes gouprest {
+    from {
+        opacity: 0; 
+        transform: translateY(35px)
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes godownrest {
+    from {
+        opacity: 1; 
+        transform: translateY(0px); 
+    }
+    to {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+}
+
+#second_m {
+    animation: moveleft 400ms ease-in-out forwards; 
+    animation-delay: 1125ms;
+}
+
+#second_short {
+    animation: moveleft 400ms ease-in-out forwards; 
+    animation-delay: 1135ms;
+}
+
+#second_med {
+    animation: moveleft 400ms ease-in-out forwards; 
+    animation-delay: 1145ms;
+}
+
+#second_long {
+    animation: moveleft 400ms ease-in-out forwards; 
+    animation-delay: 1155ms;
+}

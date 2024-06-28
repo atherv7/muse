@@ -1,0 +1,57 @@
+#landing {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  background-color: #eee3fc;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#landing div {
+  height: 20vh; 
+  width: 40vw; 
+}
+
+#join_button {
+  background-color: #eee3fc;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-top: 0.5rem; 
+  padding-bottom: 0.5rem;
+  border-radius: 2rem;
+  border-color: #8f9cff;
+  border-style: solid;
+  color: #8f9cff;
+  margin-top: 4rem; 
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, opacity 0.25s ease-in-out;
+  height: 5vh;
+  width: 12vw; 
+  font-size: 1rem; 
+  animation: fadeup 400ms ease-in-out forwards;
+  animation-delay: 2150ms; 
+  opacity: 0;
+}
+
+#join_button:hover {
+  cursor: pointer;
+  background-color: #8f9cff;
+  color: #eee3fc;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+@keyframes fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
