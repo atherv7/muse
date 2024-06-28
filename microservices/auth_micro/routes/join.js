@@ -24,9 +24,9 @@ router.get('/logout',
            }
 );
 
-// test endpoint 
+// test endpoint
 router.get('/current-user',
-           jwt.verifyToken,
+           jsonwebtoken.verifyToken,
            (req, res) => {
              res.json(req.user);
            }
