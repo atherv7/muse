@@ -23,4 +23,4 @@ function close() {
   mongodb.close();
 }
 
-modules.export = { connect, get, close };
+module.exports = { connect, get, close };

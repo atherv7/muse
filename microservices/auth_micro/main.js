@@ -11,11 +11,12 @@ const portNumber = process.env.PORT_NUMBER;
 
 app.use(express.json());
 app.use(express.urlencoded());
+
 app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {secure:false}
+  secret: process.env.SECRET
+  // ,resave: false,
+  // saveUninitialized: true,
+  // cookie: {secure:false}
 }));
 app.use(passport.initialize());
 app.use(passport.session());

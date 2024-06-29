@@ -19,7 +19,7 @@ router.get('/logout',
            (req, res)=>{
              req.logout();
              req.clearCookies('jwt');
-             req.json({'logged out'});
+             req.json({message: 'logged out'});
              req.redirect('___HOME_PAGE___');
            }
 );
@@ -31,3 +31,5 @@ router.get('/current-user',
              res.json(req.user);
            }
 );
+
+module.exports = router; 

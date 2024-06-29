@@ -5,24 +5,7 @@ const database = require('./../database/db.js');
 
 require('dotenv').config({path:path.resolve(__dirname, '../.env')});
 
-passport.serializeUser((user, done)=>{
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done)=>{
-  try {
-    const user = database.get().
-                         .db(process.env.MONGO_DATABASE)
-                         .collection(process.env.MONGO_COLLECTION)
-                         .findOne({'_id':id});
-    done(null, user); 
-  }
-  catch(err) {
-    done(err, null)
-  }
-});
-
-passport.use(GoogleStrategy({
+passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   callbackURL: '/join/google/callback',
@@ -54,3 +37,20 @@ async function(request, accessToken, refreshToken, profile, done) {
   }
 }
 ));
+
+passport.serializeUser((user, done)=>{
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done)=>{
+  try {
+    const user = database.get()
+                         .db(process.env.MONGO_DATABASE)
+                         .collection(process.env.MONGO_COLLECTION)
+                         .findOne({'_id':id});
+    done(null, user); 
+  }
+  catch(err) {
+    done(err, null)
+  } 
+});
