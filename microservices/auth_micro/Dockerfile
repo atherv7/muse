@@ -1,5 +1,5 @@
 # node.js runtime 
-FROM node:14 
+FROM node:latest 
 
 # setting up working directory in container
 RUN mkdir /usr/src/app
@@ -10,13 +10,11 @@ COPY package.json package.json
 COPY package-lock.json package-lock.json 
 
 # installing application dependencies
+RUN apt-get update
 RUN npm install 
 
 # copying application code into directory
 COPY . .
-
-# exposing the port app runs on 
-EXPOSE 3010
 
 # starting application 
 CMD ["node", "main.js"]  

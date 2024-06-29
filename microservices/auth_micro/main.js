@@ -21,7 +21,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 const joinRoute = require('./routes/join.js');
+app.use('/',(req, res) => {
+	res.status(200).json({message: 'welcome'}); 
+}); 
 app.use('/join',joinRoute);
 
 database.connect(()=>{

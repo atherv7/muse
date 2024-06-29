@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-const jsonwebtoken = require('./../utils/jwt.js');
+const jsonwebtoken = require('./../utils/jWt.js');
 
 router.get('/google',
           passport.authenticate('google',{scope:['profile','email']})
