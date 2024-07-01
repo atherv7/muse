@@ -2,9 +2,8 @@ import './Title.css';
 import { useEffect } from 'react';
 
 export default function Title({movetitle}) {
-    const sleep = ms => new Promise(r => setTimeout(r, ms)); 
-    const animateTitle = async () => {
-        if(movetitle) { 
+    const animateTitle = async (animate) => {
+        if(animate) { 
             document.getElementById('third_long').style.animation = 'godownrest 400ms ease-in-out forwards'; 
             document.getElementById('third_med').style.animation = 'godownrest 400ms ease-in-out 50ms forwards'; 
             document.getElementById('third_short').style.animation = 'godownrest 400ms ease-in-out 100ms forwards'; 
@@ -15,7 +14,7 @@ export default function Title({movetitle}) {
         }
     }
     useEffect(()=>{
-        animateTitle(); 
+        animateTitle(movetitle); 
     },[movetitle])
     return (
         <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 482.7 115.75">
