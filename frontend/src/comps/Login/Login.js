@@ -2,7 +2,7 @@ import './Login.css';
 
 export default function Login() {
     function handleLogin() {
-      window.location.href = 'http://localhost:3010/join/google'; 
+      window.location.href = 'http://localhost:8000/auth/join/google'; 
     }
     return(
         <div id='login_main'>

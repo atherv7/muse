@@ -3,8 +3,41 @@ import Landing from './comps/Landing/Landing';
 import Login from './comps/Login/Login';
 import Protected from './comps/ProtectedRoute/Protected';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { useEffect } from 'react'; 
+import axios from 'axios'; 
 
-const HomePage = () => <h1>Welcome to Muse</h1>
+const HomePage = () => {
+  useEffect(()=>{
+    console.log(document.cookie); 
+  });
+
+  async function handleJWT() {
+    const config = {
+      headers: {Authorization: `Bearer ${document.cookie.substring(document.cookie.indexOf('jwt=')+4)}`}
+    }; 
+
+    const response = await axios.get('http://localhost:8000/tests', config); 
+    document.getElementById('holder').innerHTML = response; 
+  }
+
+  async function handleNonJWT() {
+    const config = {
+      headers: {Authorization: `Bearer: nothing`}
+    }; 
+
+    const response = await axios.get('http://localhost:8000/tests', config); 
+    document.getElementById('holder').innerHTML = response; 
+  }
+
+  return (
+    <>
+      <button onClick={handleJWT}>test with jwt</button>
+      <button onClick={handleNonJWT}>test without jwt</button>
+      <h1>Welcome to Muse</h1>
+      <div id='holder'></div>
+    </>
+  );
+}
 function App() {
   return (
     <BrowserRouter>
