@@ -8,7 +8,7 @@ require('dotenv').config({path:path.resolve(__dirname, '../.env')});
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: 'http://localhost:3010/join/google/callback',
+  callbackURL: 'http://localhost:8000/auth/join/google/callback',
   passReqToCallback: true
 },
 async function(request, accessToken, refreshToken, profile, done) {
