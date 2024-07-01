@@ -7,20 +7,28 @@ router.get('/google',
 );
 
 router.get('/google/callback',
-           passport.authenticate('google',{failureRedirect:'/'}),
-           (req, res) => {
-             const token = jsonwebtoken.generateToken({id:req.user.id});
-             res.cookie('jwt',token,{httpOnly:true,secure:true,sameSite:'Strict'});
-             res.redirect('____CLIENT_ACCOUNT____');
+           passport.authenticate('google',{
+                                            // successRedirect: '/join/enter', 
+                                            failureRedirect:'/'
+                                          })
+           ,(req, res) => {
+              const token = jsonwebtoken.generateToken({id:req.user['sub']});
+              console.log(token);
+              res.cookie('jwt',token);//,{httpOnly:true,secure:true,sameSite:'Strict'});
+              res.redirect('http://localhost:3000/museum');
            }
 );
+
+router.get('/enter', (req, res) => {
+  res.json({message: 'welcome'}); 
+}); 
 
 router.get('/logout',
            (req, res)=>{
              req.logout();
              req.clearCookies('jwt');
-             req.json({message: 'logged out'});
-             req.redirect('___HOME_PAGE___');
+             res.json({message: 'logged out'});
+             res.redirect('http://localhost:3000/');
            }
 );
 

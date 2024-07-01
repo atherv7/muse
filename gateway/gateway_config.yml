@@ -1,0 +1,19 @@
+_format_version: "3.0" 
+_transform: true 
+
+services: 
+  - name: authentication 
+    url: http://localhost:3000
+    routes: 
+      - name: google 
+        paths: 
+          - /join/google
+      - name: google-callback 
+        paths: 
+          - /join/google/callback
+      - name: logout 
+        paths: 
+          - /join/logout
+      - name: current-user 
+        paths: 
+          - /join/current-user 
