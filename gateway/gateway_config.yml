@@ -2,18 +2,31 @@ _format_version: "3.0"
 _transform: true 
 
 services: 
-  - name: authentication 
-    url: http://localhost:3000
-    routes: 
-      - name: google 
-        paths: 
-          - /join/google
-      - name: google-callback 
-        paths: 
-          - /join/google/callback
-      - name: logout 
-        paths: 
-          - /join/logout
-      - name: current-user 
-        paths: 
-          - /join/current-user 
+  - name: authentication_server 
+    url: http://localhost:3010/
+  - name: test_service 
+    url: http://localhost:3020/
+
+routes: 
+  - name: authentication_requests 
+    service: authentication_server
+    paths: 
+      - /auth
+  - name: test_requests 
+    service: test_service 
+    paths: 
+      - /tests
+
+plugins: 
+  - name: jwt 
+    route: test_requests 
+    enabled: true 
+    config: 
+      key_claim_name: kid 
+      claims_to_verify: 
+        - exp 
+consumers:
+  - username: authentication_server 
+jwt_secrets: 
+  - consumer: authentication_server
+    secret: "myBiggestSecret"

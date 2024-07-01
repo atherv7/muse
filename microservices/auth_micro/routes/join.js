@@ -10,10 +10,9 @@ router.get('/google/callback',
            passport.authenticate('google',{
                                             // successRedirect: '/join/enter', 
                                             failureRedirect:'/'
-                                          })
-           ,(req, res) => {
+                                          }),
+            (req, res) => {
               const token = jsonwebtoken.generateToken({id:req.user['sub']});
-              console.log(token);
               res.cookie('jwt',token);//,{httpOnly:true,secure:true,sameSite:'Strict'});
               res.redirect('http://localhost:3000/museum');
            }
