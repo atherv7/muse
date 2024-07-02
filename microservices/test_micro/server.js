@@ -1,8 +1,14 @@
 const express = require('express'); 
+const cors = require('cors'); 
 
 const app = express(); 
 const portNumber = 3020; 
-
+const corsOption = {
+    origin: '*', 
+    credentials: true, 
+    optionSuccessStatus: 200 
+};
+app.use(cors(corsOption)); 
 app.get('/', (request, response)=>{
     response.setHeader('Content-Type', 'application/json'); 
     response.send(JSON.stringify({message:'hello'})); 
