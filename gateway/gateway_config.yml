@@ -2,31 +2,43 @@ _format_version: "3.0"
 _transform: true 
 
 services: 
-  - name: authentication_server 
-    url: http://localhost:3010/
-  - name: test_service 
-    url: http://localhost:3020/
+- host: 10.11.0.12 
+  name: auth_server 
+  port: 3010 
+  protocol: http 
+  routes: 
+    - name: join_routes 
+      paths: 
+        - /auth 
+      strip_path: true 
+- host: 10.11.0.10
+  name: test_server 
+  port: 3020 
+  protocol: http
+  plugins: 
+    - name: jwt 
+      enabled: true 
+      config: 
+        key_claim_name: kid 
+        claims_to_verify: 
+          - exp 
+    - name: cors 
+      config: 
+        origins: ['http://localhost:3000']
+        methods: ['GET','POST','OPTIONS']
+        headers: ['Authorization','Content-Type']
+        exposed_headers: ['Authorization']
+        credentials: true 
+        max_age: 3600
+  routes: 
+    - name: test_route
+      paths: 
+        - /test
+      strip_path: true 
 
-routes: 
-  - name: authentication_requests 
-    service: authentication_server
-    paths: 
-      - /auth
-  - name: test_requests 
-    service: test_service 
-    paths: 
-      - /tests
-
-plugins: 
-  - name: jwt 
-    route: test_requests 
-    enabled: true 
-    config: 
-      key_claim_name: kid 
-      claims_to_verify: 
-        - exp 
 consumers:
   - username: authentication_server 
+
 jwt_secrets: 
   - consumer: authentication_server
     secret: "myBiggestSecret"

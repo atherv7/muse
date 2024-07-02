@@ -1,7 +1,5 @@
-docker network create muse_net 
-
-docker run --name muse_gateway \
-    --network=muse_net \
+docker run -d --name muse_gateway \
+    --network=musenet \
     -v "$(pwd):/kong/declarative" \
     -e "KONG_DATABASE=off" \
     -e "KONG_DECLARATIVE_CONFIG=/kong/declarative/gateway_config.yml" \

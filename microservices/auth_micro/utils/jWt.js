@@ -3,9 +3,10 @@ const path = require('path');
 require('dotenv').config({path:path.resolve(__dirname, './../.env')});
 
 const secret = process.env.SECRET;
+const kid = process.env.API_GATEWAY_KID; 
 
 const generateToken = payload => {
-  return jsonwebtoken.sign(payload, secret, {expiresIn:'1h'});
+  return jsonwebtoken.sign(payload, secret, {keyid: kid, expiresIn:'1h'});
 }
 
 const verifyToken = (req, res, next) => {

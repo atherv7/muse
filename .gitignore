@@ -3,3 +3,4 @@
 /.DS_Store
 /microservices/auth_micro/.env
 /microservices/test_micro/node_modules/
+/microservices/.DS_Store
