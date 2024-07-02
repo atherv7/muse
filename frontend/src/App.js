@@ -13,19 +13,20 @@ const HomePage = () => {
 
   async function handleJWT() {
     const config = {
-      headers: {Authorization: `Bearer ${document.cookie.substring(document.cookie.indexOf('jwt=')+4)}`}
+        'Authorization': `Bearer ${document.cookie.substring(document.cookie.indexOf('jwt=')+4)}`
     }; 
-
-    const response = await axios.get('http://localhost:8000/tests', config); 
-    document.getElementById('holder').innerHTML = response; 
+    console.log(config);
+    const response = await axios.get('http://localhost:8000/test', {config}); 
+    console.log(response.data); 
+    document.getElementById('holder').innerHTML = response.data; 
   }
 
   async function handleNonJWT() {
     const config = {
-      headers: {Authorization: `Bearer: nothing`}
+      headers: {'Authorization': `Bearer: nothing`}
     }; 
 
-    const response = await axios.get('http://localhost:8000/tests', config); 
+    const response = await axios.get('http://localhost:8000/test', config); 
     document.getElementById('holder').innerHTML = response; 
   }
 
