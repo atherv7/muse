@@ -3,6 +3,7 @@ const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser'); 
 const database = require('./database/db.js');
+const consumer = require('./messaging/Consumer.js');
 
 require('dotenv').config();
 require('./config/passport_config.js');
@@ -25,6 +26,8 @@ app.use(passport.session());
 
 const joinRoute = require('./routes/join.js');
 app.use('/join',joinRoute);
+
+consumer.consumeMessage(); 
 
 database.connect(()=>{
   app.listen(portNumber, err => {

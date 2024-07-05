@@ -1,7 +1,4 @@
-docker run -d --name muse_gateway \
-    --network=musenet \
-    -v "$(pwd):/kong/declarative" \
-    -e "KONG_DATABASE=off" \
+docker run -d --name muse_gateway --network=musenet -v "$(pwd):/kong/declarative" -e "KONG_DATABASE=off" \
     -e "KONG_DECLARATIVE_CONFIG=/kong/declarative/gateway_config.yml" \
     -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
     -e "KONG_ADMIN_ACCESS_LOG=/dev/stdout" \

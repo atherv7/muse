@@ -12,35 +12,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
 async function(request, accessToken, refreshToken, profile, done) {
-  // try {
-  //   profile = profile._json;
-    
-  //   let user = await database.get()
-  //                            .db(process.env.MONGO_DATABASE)
-  //                            .collection(process.env.MONGO_COLLECTION)
-  //                            .find({'id':profile.sub});
-    
-  //   if(!user) {
-  //     user = {
-  //       'id': profile.sub,
-  //       'email': profile.email,
-  //       'username': '__nousername'
-  //     };
-
-  //     await database.get()
-  //                   .db(process.env.MONGO_DATABASE)
-  //                   .collection(process.env.MONGO_COLLECTION)
-  //                   .insertOne(user);
-  //   }
-    
-  //   done(null, user);
-  //   console.log('profile sub: ' + profile.sub);
-  // }
-  // catch(error) {
-  //   console.log('there was an error'); 
-  //   done(error, null);
-  // }
-  done(null, profile._json); 
+  done(null, profile); 
 }
 ));
 
@@ -48,15 +20,16 @@ passport.serializeUser((user, done)=>{
   done(null, user);
 });
 
-passport.deserializeUser(async (id, done)=>{
-  try {
-    const user = await database.get()
-                               .db(process.env.MONGO_DATABASE)
-                               .collection(process.env.MONGO_COLLECTION)
-                               .findOne({'id':id});
-    done(null, user); 
-  }
-  catch(err) {
-    done(err, null)
-  } 
+passport.deserializeUser((user, done)=>{
+  // try {
+  //   const user = await database.get()
+  //                              .db(process.env.MONGO_DATABASE)
+  //                              .collection(process.env.MONGO_COLLECTION)
+  //                              .findOne({'id':id});
+  //   done(null, user); 
+  // }
+  // catch(err) {
+  //   done(err, null)
+  // }
+  done(null, user); 
 });

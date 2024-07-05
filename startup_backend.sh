@@ -2,10 +2,19 @@
 docker network create musenet --subnet=10.11.0.0/16
 
 # starting up API gateway 
-sh gateway/startup_gateway.sh
+cd ./gateway
+sh ./startup_gateway.sh
+cd ../
 
-# starting up authentication server 
-sh microservices/auth_micro/startup_authentication.sh 
-
+# starting up microservices
+cd ./microservices/
+# starting up authentication server
+cd ./auth_micro/ 
+sh ./startup_authentication.sh 
+cd ../
 # starting up test server 
-sh microservices/test_micro/startup_testing.sh 
+cd ./test_micro/
+sh ./startup_testing.sh 
+cd ../
+
+cd ../
