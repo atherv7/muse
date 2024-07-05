@@ -6,7 +6,6 @@ const path = require('path');
 require('dotenv').config({path:path.resolve(__dirname, '../.env')});
 
 const recordUser = async userInfo => {
-  console.log(userInfo); 
   const present = await database.get()
                                 .db(process.env.MONGO_DATABASE)
                                 .collection(process.env.MONGO_COLLECTION)
@@ -14,10 +13,10 @@ const recordUser = async userInfo => {
 
   if(present) {
     if(present.username === '__no_username__') {
-      return [userInfo.sub, true]; 
+      return true; 
     }
     else {
-      return [present, false]; 
+      return false; 
     }
   }
   else {
@@ -29,7 +28,7 @@ const recordUser = async userInfo => {
                     email: userInfo.email, 
                     username: '__no_username__'
                   }); 
-    return [userInfo.sub, true]; 
+    return true; 
   }
 }
 
@@ -44,9 +43,37 @@ router.get('/google/callback',
                                           })
 ); 
 
+router.post('/changeusername', 
+            jsonwebtoken.verifyToken,
+            async (req, res) => {
+              const userInfo = req.user; 
+              const username = req.body.username; 
+              try {
+                console.log(JSON.stringify(userInfo)); 
+                console.log(username); 
+                await database.get() 
+                              .db(process.env.MONGO_DATABASE)
+                              .collection(process.env.MONGO_COLLECTION)
+                              .updateOne({id: userInfo.id}, 
+                                         {$set: {username: username}}, 
+                                         (error, response) => {
+                                          if (error) throw error; 
+                                          response.redirect('http://localhost:3000/museum'); 
+                                         }
+                                        );
+              }
+              catch(error) {
+                console.log(error); 
+              }
+}); 
+
 router.get('/enter', async (request, response) => {
-  const [_, newUser] = await recordUser(request.user._json); 
-  const token = jsonwebtoken.generateToken({id:request.user.sub}); 
+  const userJson = request.user._json; 
+  const newUser = await recordUser(userJson); 
+  const token = jsonwebtoken.generateToken({id:userJson.sub, 
+                                            email: userJson.email, 
+                                            username: userJson.username
+                                          }); 
   response.cookie('jwt', token); 
   if(newUser) {
     response.redirect('http://localhost:3000/changeusername'); 
