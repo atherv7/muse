@@ -56,11 +56,13 @@ router.post('/changeusername',
                               .collection(process.env.MONGO_COLLECTION)
                               .updateOne({id: userInfo.id}, 
                                          {$set: {username: username}}, 
-                                         (error, response) => {
+                                         (error, _) => {
                                           if (error) throw error; 
-                                          response.redirect('http://localhost:3000/museum'); 
                                          }
                                         );
+                console.log('username saved'); 
+                res.status(200).json({message:'username updated'}); 
+                console.log('redirecting to http://localhost:3000/museum...'); 
               }
               catch(error) {
                 console.log(error); 
@@ -71,8 +73,7 @@ router.get('/enter', async (request, response) => {
   const userJson = request.user._json; 
   const newUser = await recordUser(userJson); 
   const token = jsonwebtoken.generateToken({id:userJson.sub, 
-                                            email: userJson.email, 
-                                            username: userJson.username
+                                            email: userJson.email
                                           }); 
   response.cookie('jwt', token); 
   if(newUser) {

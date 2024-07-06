@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const cors = require('cors'); 
 const session = require('express-session');
 const bodyParser = require('body-parser'); 
 const database = require('./database/db.js');
@@ -10,6 +11,13 @@ require('./config/passport_config.js');
 
 const app = express();
 const portNumber = process.env.PORT_NUMBER;
+
+const corsOption = {
+  origin: '*', 
+  credentials: true, 
+  optionSuccessStatus: 200 
+};
+app.use(cors(corsOption)); 
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());

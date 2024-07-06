@@ -16,9 +16,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.get('/', async (request, response)=>{
     // const token = request.headers.authorization.split(' ')[1]; 
-    console.log(request.body);
-    await producer.publishMessage(request.body.logType, request.body.message); 
-    response.send(); 
+    // console.log(request.body);
+    // await producer.publishMessage(request.body.logType, request.body.message); 
+    // response.send(); 
+    const token = request.headers.authorization.split(' ')[1]; 
+    console.log(token);
+    response.send(token);  
 }); 
 
 app.listen(portNumber, err => {
