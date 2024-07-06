@@ -13,7 +13,7 @@ const HomePage = () => {
   });
 
   async function handleJWT() {
-    const jwt = document.cookie.substring(document.cookie.indexOf('jwt=')+4)
+    const jwt = document.cookie.substring(document.cookie.indexOf('jwt=')+4);
     const config = {
       headers: {
         'Authorization': `Bearer ${jwt}`
